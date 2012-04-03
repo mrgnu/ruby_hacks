@@ -9,13 +9,16 @@ image of size IMG_W x IMG_H.
 =end
 
 # url to rss feed
-URL   = 'http://www.nasa.gov/rss/image_of_the_day.rss'
+URL   = 'http://www.nasa.gov/rss/lg_image_of_the_day.rss'
 # size of final (composited) image
 IMG_W = 1600
 IMG_H = 900
 # max size of source image
 MAX_W = IMG_W
 MAX_H = 700
+
+# target folder
+LOC   = "./"
 
 
 require 'hpricot'
@@ -30,7 +33,7 @@ image = item.search("enclosure")[0].get_attribute('url')
 
 # download image
 puts "downloading #{image} ..."
-source = File.basename(image)
+source = LOC + File.basename(image)
 open(source, 'wb') << open(image).read
 
 # create black background
@@ -64,5 +67,8 @@ draw.fill   = 'none'
 draw.rectangle(ix-1, iy-1, ix+iw+2, iy+ih+2)
 draw.draw(bg)
 
-#write result to file
-bg.write('bg_'+source)
+# write result to file
+bg.write(source)
+
+# set as X background
+exec "feh --bg-scale #{source}"
