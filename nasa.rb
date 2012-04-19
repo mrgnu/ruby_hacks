@@ -64,7 +64,7 @@ draw.annotate(bg, 0, 0, 10, 10, title) {
 # add border
 draw.stroke = 'white'
 draw.fill   = 'none'
-draw.rectangle(ix-1, iy-1, ix+iw+2, iy+ih+2)
+draw.rectangle(ix-1, iy-1, ix+iw+1, iy+ih+1)
 draw.draw(bg)
 
 # write result to file
